@@ -2,6 +2,7 @@ package com.example.thirdyear.controller;
 
 import com.example.thirdyear.entity.Note;
 import com.example.thirdyear.service.NoteService;
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -14,7 +15,7 @@ public class NoteController {
         this.noteService = noteService;
     }
     @PostMapping
-    public Note addNote(@RequestBody Note note) {
+    public Note addNote(@Valid @RequestBody Note note) {
         return noteService.addNote(note);
     }
     @GetMapping
@@ -34,6 +35,4 @@ public class NoteController {
 public void deleteNote(@PathVariable Long id){
         noteService.deleteNote(id);
 }
-
-
 }

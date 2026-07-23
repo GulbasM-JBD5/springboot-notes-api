@@ -16,6 +16,7 @@ public class NoteService {
         this.noteRepository = noteRepository;
     }
     public Note addNote(Note note) {
+        System.out.println("Service method called");
 
         note.setCreatedAt(LocalDate.now());
 
