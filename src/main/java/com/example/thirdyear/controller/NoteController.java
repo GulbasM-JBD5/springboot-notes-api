@@ -1,5 +1,6 @@
 package com.example.thirdyear.controller;
 
+import com.example.thirdyear.dto.NoteResponse;
 import com.example.thirdyear.entity.Note;
 import com.example.thirdyear.service.NoteService;
 import jakarta.validation.Valid;
@@ -19,7 +20,7 @@ public class NoteController {
         return noteService.addNote(note);
     }
     @GetMapping
-    public List<Note> showAllNotes() {
+    public List<NoteResponse> showAllNotes() {
         return noteService.showAllNotes();
     }
     @GetMapping("/{id}")
