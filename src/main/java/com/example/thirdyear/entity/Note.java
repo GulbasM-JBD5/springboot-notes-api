@@ -11,15 +11,12 @@ import java.time.LocalDate;
 @Entity
 @Table(name="notes")
 public class Note {
-
+//title ve content de annotasiyalar silindi (for Dto)
     @Id
    @GeneratedValue(strategy = GenerationType.IDENTITY)
    private Long  id ;
-    @NotBlank(message="Title cannot be blank")
-    @Size(min = 3, max = 100, message = "Title must be between 3 and 100 characters")
+
     private String title ;
-    @NotBlank(message="Content cannot be blank")
-    @Size(min = 5, message = "Content must contain at least 5 characters")
     private String content;
     private LocalDate createdAt;
     public Note() {

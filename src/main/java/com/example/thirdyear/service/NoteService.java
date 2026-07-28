@@ -1,5 +1,6 @@
 package com.example.thirdyear.service;
 
+import com.example.thirdyear.dto.NoteRequest;
 import com.example.thirdyear.dto.NoteResponse;
 import com.example.thirdyear.entity.Note;
 import com.example.thirdyear.repository.NoteRepository;
@@ -17,12 +18,19 @@ public class NoteService {
     public NoteService(NoteRepository noteRepository) {
         this.noteRepository = noteRepository;
     }
-    public Note addNote(Note note) {
+    public NoteResponse addNote( NoteRequest noteRequest) {
         System.out.println("Service method called");
-
+        Note note=new Note();
+        note.setTitle(noteRequest.getTitle());
+        note.setContent(noteRequest.getContent());
         note.setCreatedAt(LocalDate.now());
-
-        return noteRepository.save(note);
+          Note savedNote= noteRepository.save(note);
+          NoteResponse noteResponse=new NoteResponse();
+        noteResponse.setTitle(savedNote.getTitle());
+        noteResponse.setContent(savedNote.getContent());
+        noteResponse.setCreatedAt(savedNote.getCreatedAt());
+        noteResponse.setId(savedNote.getId());
+        return noteResponse;
     }
     public List<NoteResponse> showAllNotes() {
         //howAllNotes() metodunu DTO qaytaracaq vəziyyətə gətirməkdir

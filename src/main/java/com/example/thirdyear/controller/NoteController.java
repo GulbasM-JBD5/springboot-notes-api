@@ -1,5 +1,6 @@
 package com.example.thirdyear.controller;
 
+import com.example.thirdyear.dto.NoteRequest;
 import com.example.thirdyear.dto.NoteResponse;
 import com.example.thirdyear.entity.Note;
 import com.example.thirdyear.service.NoteService;
@@ -16,8 +17,9 @@ public class NoteController {
         this.noteService = noteService;
     }
     @PostMapping
-    public Note addNote(@Valid @RequestBody Note note) {
-        return noteService.addNote(note);
+     //  Note obyekyti deyil NoteRequest obyekti (RequestDto ya gore)
+    public NoteResponse addNote(@Valid@RequestBody NoteRequest noteRequest) {
+        return noteService.addNote(noteRequest);
     }
     @GetMapping
     public List<NoteResponse> showAllNotes() {
