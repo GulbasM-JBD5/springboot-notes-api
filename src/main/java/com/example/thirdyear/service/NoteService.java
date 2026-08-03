@@ -4,6 +4,7 @@ import com.example.thirdyear.dto.NoteRequest;
 import com.example.thirdyear.dto.NoteResponse;
 import com.example.thirdyear.entity.Note;
 import com.example.thirdyear.repository.NoteRepository;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -18,7 +19,7 @@ public class NoteService {
     public NoteService(NoteRepository noteRepository) {
         this.noteRepository = noteRepository;
     }
-    public NoteResponse addNote( NoteRequest noteRequest) {
+    public NoteResponse  addNote(NoteRequest noteRequest) {
         System.out.println("Service method called");
         Note note=new Note();
         note.setTitle(noteRequest.getTitle());

@@ -5,6 +5,7 @@ import com.example.thirdyear.dto.NoteResponse;
 import com.example.thirdyear.entity.Note;
 import com.example.thirdyear.service.NoteService;
 import jakarta.validation.Valid;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,8 +19,10 @@ public class NoteController {
     }
     @PostMapping
      //  Note obyekyti deyil NoteRequest obyekti (RequestDto ya gore)
-    public NoteResponse addNote(@Valid@RequestBody NoteRequest noteRequest) {
-        return noteService.addNote(noteRequest);
+    public ResponseEntity<NoteResponse> addNote(@Valid@RequestBody NoteRequest noteRequest) {
+        NoteResponse noteResponse = noteService.addNote(noteRequest);
+
+        return ResponseEntity.status(201).body(noteResponse);
     }
     @GetMapping
     public List<NoteResponse> showAllNotes() {
@@ -35,7 +38,9 @@ public class NoteController {
     }
 
 @DeleteMapping("/{id}")
-public void deleteNote(@PathVariable Long id){
+public ResponseEntity<Void> deleteNote(@PathVariable Long id){
+
         noteService.deleteNote(id);
+    return ResponseEntity.noContent().build();
 }
 }
