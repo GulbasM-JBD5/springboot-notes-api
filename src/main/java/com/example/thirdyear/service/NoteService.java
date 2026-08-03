@@ -47,17 +47,34 @@ public class NoteService {
         }
         return noteresponses;
     }
-    public Note showById (Long id){
-       return  noteRepository.findById(id).orElseThrow(()->new ResponseStatusException(
+    public NoteResponse showById (Long id){
+
+
+               Note note=noteRepository.findById(id).orElseThrow(()->new ResponseStatusException(
                HttpStatus.NOT_FOUND,
                "Note tapılmadı."));
+       NoteResponse noteResponse=new NoteResponse();
+       noteResponse.setTitle(note.getTitle());
+        noteResponse.setContent(note.getContent());
+        noteResponse.setCreatedAt(note.getCreatedAt());
+        noteResponse.setId(note.getId());
+       return noteResponse;
+
     }
-    public Note updateContent(Long id,Note note){
+    public NoteResponse updateContent(Long id,NoteRequest noteRequest){
+        System.out.println("UPDATE SERVICE CALLED");
+        //noterequest geldi title,content ,id var urlde ,noterepository isleyir ancaq note obyeki ile
         Note existingNote = noteRepository.findById(id).orElseThrow(()-> new ResponseStatusException(
                 HttpStatus.NOT_FOUND,"Note taplmadı."));
-           existingNote.setTitle(note.getTitle());
-        existingNote.setContent(note.getContent()); ;
-        return noteRepository.save(existingNote);
+           existingNote.setTitle(noteRequest.getTitle());
+        existingNote.setContent(noteRequest.getContent()); ;
+       noteRepository.save(existingNote);
+       NoteResponse noteResponse=new NoteResponse();
+       noteResponse.setTitle(existingNote.getTitle());
+        noteResponse.setContent(existingNote.getContent());
+        noteResponse.setId(existingNote.getId());
+        noteResponse.setCreatedAt(existingNote.getCreatedAt());
+        return noteResponse;
     }
     public void deleteNote(Long id){
         Note exsistingNote= noteRepository.findById(id).orElseThrow(()-> new ResponseStatusException(

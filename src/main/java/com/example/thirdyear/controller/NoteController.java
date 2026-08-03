@@ -26,12 +26,12 @@ public class NoteController {
         return noteService.showAllNotes();
     }
     @GetMapping("/{id}")
-    public Note showById(@PathVariable Long id){
+    public NoteResponse showById(@PathVariable Long id){
          return noteService.showById(id);
     }
     @PutMapping("/{id}")
-    public Note updateContent (@PathVariable Long id,@RequestBody Note note) {
-        return noteService.updateContent(id, note);
+    public NoteResponse updateContent (@PathVariable Long id,@Valid @RequestBody NoteRequest noteRequest) {
+        return noteService.updateContent(id, noteRequest);
     }
 
 @DeleteMapping("/{id}")
