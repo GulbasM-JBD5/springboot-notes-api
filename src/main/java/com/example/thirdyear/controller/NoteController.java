@@ -5,6 +5,7 @@ import com.example.thirdyear.dto.NoteResponse;
 import com.example.thirdyear.entity.Note;
 import com.example.thirdyear.service.NoteService;
 import jakarta.validation.Valid;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -38,6 +39,7 @@ public class NoteController {
     }
 
 @DeleteMapping("/{id}")
+@ResponseStatus(HttpStatus.NO_CONTENT)
 public ResponseEntity<Void> deleteNote(@PathVariable Long id){
 
         noteService.deleteNote(id);
