@@ -20,7 +20,9 @@ public class UserService {
     }
 
     public void register(UserRequest request) {
-
+         if(userRepository.findByEmail(request.getEmail()).isPresent()){
+             throw new RuntimeException("Bu email artıq istifadə olunur.");
+         }
         User user = new User();
 
         user.setFirstName(request.getFirstName());

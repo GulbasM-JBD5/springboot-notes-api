@@ -2,6 +2,7 @@ package com.example.thirdyear.controller;
 
 import com.example.thirdyear.dto.UserRequest;
 import com.example.thirdyear.service.UserService;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import com.example.thirdyear.dto.LoginRequest;
@@ -18,11 +19,11 @@ public class UserController {
 
     @PostMapping("/register")
     @ResponseStatus(HttpStatus.CREATED)
-    public void register(@RequestBody UserRequest request) {
+    public void register(@Valid @RequestBody UserRequest request) {
         userService.register(request);
     }
     @PostMapping("/login")
-    public boolean login(@RequestBody LoginRequest request) {
+    public boolean login( @Valid @RequestBody LoginRequest request) {
         return userService.login(request);
     }
 }
