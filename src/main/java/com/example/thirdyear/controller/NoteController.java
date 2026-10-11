@@ -1,5 +1,6 @@
 package com.example.thirdyear.controller;
 
+import com.example.thirdyear.dto.NotePageResponse;
 import com.example.thirdyear.dto.NoteRequest;
 import com.example.thirdyear.dto.NoteResponse;
 import com.example.thirdyear.entity.Note;
@@ -26,8 +27,10 @@ public class NoteController {
         return ResponseEntity.status(201).body(noteResponse);
     }
     @GetMapping
-    public List<NoteResponse> showAllNotes() {
-        return noteService.showAllNotes();
+    public NotePageResponse showAllNotes(
+        @RequestParam(defaultValue = "0") int page,
+        @RequestParam(defaultValue = "15") int size,String search) {
+        return noteService.showAllNotes(page, size,search);
     }
     @GetMapping("/{id}")
     public NoteResponse showById(@PathVariable Long id){

@@ -19,6 +19,9 @@ public class Note {
     private String title ;
     private String content;
     private LocalDate createdAt;
+    @ManyToOne
+    @JoinColumn(name="user_id")
+    private User user;
     public Note() {
 
     }
@@ -52,5 +55,12 @@ public class Note {
 
     public void setCreatedAt(LocalDate createdAt) {
         this.createdAt = createdAt;
+    }
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }

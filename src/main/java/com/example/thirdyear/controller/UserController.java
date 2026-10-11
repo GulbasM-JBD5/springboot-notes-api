@@ -23,7 +23,7 @@ public class UserController {
         userService.register(request);
     }
     @PostMapping("/login")
-    public boolean login( @Valid @RequestBody LoginRequest request) {
+    public String login( @Valid @RequestBody LoginRequest request) {
         return userService.login(request);
     }
 }
